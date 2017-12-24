@@ -51,15 +51,15 @@ if __name__ == '__main__':
     stack = Stack()
     for i in range(15,20):
         stack.push(i)
-    print("Stack:", stack.__repr__())
+    print("Stack:", stack)
     print(stack.min_array)
     for i in range(10, 5, -1):
         stack.push(i)
-    print("Stack:", stack.__repr__())
+    print("Stack:", stack)
     print(stack.min_array)
     for i in range(1, 13):
         print(stack.pop(), stack.find_min())
-    print("Stack:", stack.__repr__())
+    print("Stack:", stack)
     print(stack.min_array)
 
 
