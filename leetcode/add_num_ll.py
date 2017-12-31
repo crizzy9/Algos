@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/add-two-numbers/description/
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -11,6 +12,7 @@ class ListNode:
 
 
 class Solution:
+
     def addTwoNumbers(self, l1, l2):
         """
         :type l1: ListNode
@@ -39,6 +41,12 @@ class Solution:
             ans.next = ListNode(carry)
         return head
 
+
+"""
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+"""
 
 l1 = ListNode(2)
 l1.next = ListNode(4)
