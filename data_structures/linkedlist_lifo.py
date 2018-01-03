@@ -1,23 +1,8 @@
-class Node(object):
-
-    def __init__(self, value=None, pointer=None):
-        self.value = value
-        self.pointer = pointer
-
-    def getData(self):
-        return self.value
-
-    def getNext(self):
-        return self.pointer
-
-    def setData(self, newdata):
-        self.value = newdata
-
-    def setNext(self, newpointer):
-        self.pointer = newpointer
+from data_structures.node import Node
 
 
-class LinkedListLIFO(object):
+class LinkedListLIFO:
+
     def __init__(self):
         self.head = None
         self.length = 0
@@ -82,3 +67,23 @@ class LinkedListLIFO(object):
             self._delete(prev, node)
         else:
             print('Node with value {} not found'.format(value))
+
+
+ll = LinkedListLIFO()
+for i in range(1, 5):
+    ll._add(i)
+print('The list is:')
+ll._printList()
+print('The list after deleting node with index 2:')
+ll.deleteNode(2)
+ll._printList()
+print('The list after deleting node with value 3:')
+ll.deleteNodeByValue(2)
+ll._printList()
+print('The list after adding node with value 15')
+ll._add(15)
+ll._printList()
+print("The list after deleting everything...")
+for i in range(ll.length - 1, -1, -1):
+    ll.deleteNode(i)
+ll._printList()

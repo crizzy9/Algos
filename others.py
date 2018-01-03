@@ -128,4 +128,4 @@ def grep_from_files(word, files):
                     print("{0}:{1}:{2:.40}".format(filename, lino, line.rstrip()))
 
 
-grep_from_files('List', ['linkedlist.py', 'others.py'])
+grep_from_files('List', ['linkedlist_lifo.py', 'others.py'])
