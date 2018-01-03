@@ -12,7 +12,6 @@ class Solution:
         :type board: List[List[str]]
         :rtype: void Do not return anything, modify board in-place instead.
         """
-        self.possibilities = {}
         # calculating possibilities
         for row in range(9):
             for col in range(9):
@@ -134,6 +133,16 @@ example3 = [['8', '.', '.', '.', '.', '.', '.', '.', '.'],
             ['.', '.', '8', '5', '.', '.', '.', '1', '.'],
             ['.', '9', '.', '.', '.', '.', '4', '.', '.']]
 
+example4 = [[".", ".", "9", "7", "4", "8", ".", ".", "."],
+            ["7", ".", ".", ".", ".", ".", ".", ".", "."],
+            [".", "2", ".", "1", ".", "9", ".", ".", "."],
+            [".", ".", "7", ".", ".", ".", "2", "4", "."],
+            [".", "6", "4", ".", "1", ".", "5", "9", "."],
+            [".", "9", "8", ".", ".", ".", "3", ".", "."],
+            [".", ".", ".", "8", ".", "3", ".", "2", "."],
+            [".", ".", ".", ".", ".", ".", ".", ".", "6"],
+            [".", ".", ".", "2", "7", "5", "9", ".", "."]]
+
 
 sol = Solution()
 print("EXAMPLE 1: ")
@@ -142,3 +151,5 @@ print("EXAMPLE 2: ")
 sol.solveSudoku(example2)
 print("EXAMPLE 3: ")
 sol.solveSudoku(example3)
+print("EXAMPLE 4: ")
+sol.solveSudoku(example4)
