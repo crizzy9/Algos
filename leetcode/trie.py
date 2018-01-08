@@ -1,10 +1,11 @@
 class Node:
-    def __init__(self, value):
+    def __init__(self, value, key=False):
         self.value = value
+        self.key = key
         self.children = {}
 
     def __repr__(self):
-        return "Node({}, {})".format(self.value, self.children)
+        return "Node({}, {}, {})".format(self.value, self.key, self.children)
 
 class Trie:
 
@@ -33,6 +34,8 @@ class Trie:
             node.children[word[:i+1]] = Node(word[:i+1])
             node = node.children[word[:i+1]]
             i += 1
+        if i == len(word):
+            node.key = True
 
     def search(self, word):
         """
@@ -48,6 +51,10 @@ class Trie:
                 i += 1
             else:
                 break
+        if i == len(word) and node.key:
+            return True
+        else:
+            return False
 
     def startsWith(self, prefix):
         """
@@ -55,8 +62,19 @@ class Trie:
         :type prefix: str
         :rtype: bool
         """
+        node = self.root
+        i = 0
+        while i < len(prefix):
+            if node.children.get(prefix[:i+1]):
+                node = node.children[prefix[:i+1]]
+                i += 1
+            else:
+                break
 
-
+        if i == len(prefix):
+            return True
+        else:
+            return False
 
 
 
@@ -76,5 +94,10 @@ obj.insert("inn")
 
 print(obj)
 
-# param_2 = obj.search(word)
-# param_3 = obj.startsWith(prefix)
+print(obj.search("in"))
+print(obj.search("tan"))
+print(obj.search("ten"))
+
+print(obj.startsWith("to"))
+print(obj.startsWith("nv"))
+print(obj.startsWith("in"))
