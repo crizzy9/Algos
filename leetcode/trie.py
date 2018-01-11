@@ -5,7 +5,15 @@ class Node:
         self.children = {}
 
     def __repr__(self):
-        return "Node({}, {}, {})".format(self.value, self.key, self.children)
+        # return "Node({}, {}, {})".format(self.value, self.key, self.children)
+        return self.rpr()
+
+    def rpr(self, level=0):
+        ret = "\t" * level + self.value + "\n"
+
+        for child in self.children.values():
+            ret += child.rpr(level + 1)
+        return ret
 
 class Trie:
 
