@@ -53,3 +53,10 @@ bst.insert(bst.root, 80)
 
 bst.inorder(bst.root)
 print(bst.search(bst.root, 80))
+bst = BST(10)
+bst.insert(bst.root, 5)
+bst.insert(bst.root, 15)
+bst.insert(bst.root, 6)
+bst.insert(bst.root, 20)
+
+bst.inorder(bst.root)
