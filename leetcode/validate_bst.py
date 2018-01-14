@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/validate-binary-search-tree/description/
 # Definition for a binary tree node.
+from collections import deque
+import sys
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
@@ -34,6 +37,21 @@ class Solution:
             self.inorder(root.left)
             self.res.append(root.val)
             self.inorder(root.right)
+
+    def validate_using_deque(self, root):
+        if root is None:
+            return True
+
+        queue = deque([(root, float('-inf'), sys.maxsize)])
+        while queue:
+            node, low, up = queue.popleft()
+            if node.val <= low or node.val >= up:
+                return False
+            if node.left is not None:
+                queue.append((node.left, low, node.val))
+            if node.right is not None:
+                queue.append((node.right, node.val, up))
+        return True
 
 
 
