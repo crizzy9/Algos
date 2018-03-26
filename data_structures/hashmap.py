@@ -1,3 +1,6 @@
+import re
+
+
 class LinkedList:
     class Node:
         def __init__(self, value=None, pointer=None, count=1):
@@ -65,14 +68,6 @@ class LinkedList:
             return True
 
 
-ll = LinkedList()
-ll.insert('wtf', 1)
-ll.insert('shyam', 1)
-ll.insert('awesome', 1)
-ll.insert("wtf", 2)
-print(ll)
-
-
 class HashMap:
     def __init__(self):
         # number of keys collision will be handled using linked list
@@ -112,17 +107,39 @@ class HashMap:
         return hash_value % self.k
 
     def __repr__(self):
-        non_empty_list = [ll for ll in self.keys if not ll.is_empty()]
-        return "HashMap({})".format(non_empty_list)
+        # non_empty_list = [ll for ll in self.keys if not ll.is_empty()]
+        # return "HashMap({})".format(non_empty_list)
+        ret = 'HashMap(\n'
+        for i, ll in enumerate(self.keys):
+            ret += '\t'+str(i)+' : '+repr(ll) + '\n'
+        return ret
 
 
-hm = HashMap()
-hm.insert("this", 1)
-hm.insert("is", 1)
-hm.insert("shyam", 1)
-hm.insert("this", 1)
-hm.insert("is", 1)
-hm.insert("lala", 1)
-hm.delete("is")
-print(hm)
-print(hm.find("shyam"))
+if __name__ == '__main__':
+    ll = LinkedList()
+    ll.insert('wtf', 1)
+    ll.insert('shyam', 1)
+    ll.insert('awesome', 1)
+    ll.insert("wtf", 2)
+    print(ll)
+
+    hm = HashMap()
+    hm.insert("this", 1)
+    hm.insert("is", 1)
+    hm.insert("shyam", 1)
+    hm.insert("this", 1)
+    hm.insert("is", 1)
+    hm.insert("lala", 1)
+    hm.delete("is")
+    print(hm)
+    print(hm.find("shyam"))
+
+    filename = 'alice_in_wonderland.txt'
+    with open(filename, 'r', encoding='utf=8', errors='ignore') as f:
+        data = re.sub(r'([\n\t ])+', ' ', f.read())
+    words = data.split(' ')
+
+    file_hm = HashMap()
+    for word in words:
+        file_hm.insert(word, 1)
+    print(file_hm)

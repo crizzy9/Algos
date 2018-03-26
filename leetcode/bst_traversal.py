@@ -12,7 +12,7 @@ class TreeNode:
 def inorder_recursive(res, root):
     if root:
         inorder_recursive(res, root.left)
-        res.append(root.val)
+        res.append(root.al)
         inorder_recursive(res, root.right)
 
 
