@@ -117,10 +117,10 @@ class HashMap:
 
 if __name__ == '__main__':
     ll = LinkedList()
-    ll.insert('wtf', 1)
-    ll.insert('shyam', 1)
-    ll.insert('awesome', 1)
-    ll.insert("wtf", 2)
+    ll.insert('this', 1)
+    ll.insert('is', 1)
+    ll.insert('shyams', 1)
+    ll.insert("code", 2)
     print(ll)
 
     hm = HashMap()
@@ -143,3 +143,11 @@ if __name__ == '__main__':
     for word in words:
         file_hm.insert(word, 1)
     print(file_hm)
+    file_hm.insert("random", 10)
+    file_hm.increase("random")
+    print(file_hm.find("random"))
+    file_hm.delete("random")
+    file_hm.increase("random")
+    print(file_hm.find("random"))
+    file_hm.increase("addition")
+    print(file_hm.find("addition"))
