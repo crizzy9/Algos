@@ -7,12 +7,10 @@ class BinomialHeap:
             self.key = key
             self.child = child
             self.parent = parent
-            # sibling is the right most sibling to the current node of degree=current -1
             self.sibling = sibling
             self.degree = degree
 
         def __repr__(self):
-            # return "Node(key={}, degree={}, sibling={})".format(self.key, self.degree, self.sibling)
             return "{" + "key: {}, degree: {}, child: {}, sibling: {}".format(self.key, self.degree, self.child, self.sibling) + "}"
 
     def __init__(self):
@@ -25,36 +23,12 @@ class BinomialHeap:
         else:
             self.head = self.union(self.head, self.Node(key=key))
 
-    # simplify
     def _merge(self, h1, h2):
-        new_heap = None
-        curr = None
+        new_heap = self.Node()
+        curr = new_heap
         n1 = h1
         n2 = h2
         while n1 is not None and n2 is not None:
-            if new_heap is None:
-                if n1.degree == n2.degree:
-                    h1 = h1.sibling
-                    h2 = h2.sibling
-                    new_heap = n1
-                    n1.sibling = n2
-                    n2.sibling = None
-                    curr = n2
-                    n1 = h1
-                    n2 = h2
-                elif n1.degree < n2.degree:
-                    h1 = h1.sibling
-                    new_heap = n1
-                    n1.sibling = None
-                    curr = n1
-                    n1 = h1
-                else:
-                    h2 = h2.sibling
-                    new_heap = n2
-                    n2.sibling = None
-                    curr = n2
-                    n2 = h2
-                continue
             if n1.degree == n2.degree:
                 h1 = h1.sibling
                 h2 = h2.sibling
@@ -81,6 +55,7 @@ class BinomialHeap:
             curr.sibling = n2
         elif n1 is not None and n2 is None:
             curr.sibling = n1
+        new_heap = new_heap.sibling
         return new_heap
 
     # where y.key <= x.key
@@ -92,8 +67,6 @@ class BinomialHeap:
 
     def union(self, h1, h2):
         dummy_head = self._merge(h1, h2)
-        # print("Merged heap:")
-        # print(self._display(dummy_head))
         prev_x = None
         x = dummy_head
         next_x = x.sibling
@@ -114,8 +87,6 @@ class BinomialHeap:
                 self._link(x, next_x)
                 x = next_x
                 next_x = x.sibling
-        # print("After union:")
-        # print(self._display(dummy_head))
         return dummy_head
 
     # return min, prev_node min
@@ -135,11 +106,9 @@ class BinomialHeap:
 
     def extract_min(self):
         node, node_prev = self.min()
-        # data leaking because node is just left to itself how to remove it?
+        # data leak
         node_prev.sibling = node.sibling
-
         prev = node.child
-        # if not None?
         curr = prev.sibling
         nxt = curr.sibling
 
@@ -156,10 +125,6 @@ class BinomialHeap:
 
         old_heap = self.head
         new_heap = prev
-        # print("Old heap:")
-        # print(self._display(old_heap))
-        # print("New heap:")
-        # print(self._display(new_heap))
         self.head = self.union(old_heap, new_heap)
 
     def delete(self, key):
@@ -220,7 +185,6 @@ class BinomialHeap:
 
     def __repr__(self):
         return self._display(self.head)
-        # return "BinomialHeap({})".format(self.head)
 
 
 if __name__ == '__main__':
