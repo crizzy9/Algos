@@ -2,35 +2,8 @@
 from collections import Counter
 
 class Solution:
+    # Beats 72.19 % of python3 solutions
     def lengthOfLongestSubstring(self, a):
-        """
-        :type a: str
-        :rtype: int
-        """
-        s = a
-        curr = ''
-        longest = ''
-        i = 0
-        while i < len(a):
-            try:
-                ind = curr.index(a[i])
-                a = a[ind+1:]
-                i = 0
-                if len(longest) < len(curr):
-                    longest = curr
-                curr = ''
-            except ValueError as e:
-                curr += a[i]
-                if len(longest) < len(curr):
-                    longest = curr
-                i += 1
-        
-        print('algo1: longest unique substring for {} is {} with length: {}'.format(s, longest, len(longest)))
-        return len(longest)
-
-    # Beats 66.74% of submissions 96ms
-    def lengthOfLongestSubstring2(self, a):
-        # create char freq dict
         cd = {} 
         i = 0
         j = 0
@@ -43,18 +16,11 @@ class Solution:
             j += 1
             if len(a[i:j]) > len(longest):
                 longest = a[i:j]
-        print('algo2: longest unique substring for {} is {} with length: {}'.format(a, longest, len(longest)))
         return len(longest)
 
 s = Solution()
-s.lengthOfLongestSubstring("pwawkew")
-s.lengthOfLongestSubstring("bcdpwawkew")
-s.lengthOfLongestSubstring("pwawkalemkw")
-s.lengthOfLongestSubstring("pwamkfpbwefjqbzaekw")
-
-s.lengthOfLongestSubstring2("pwawkew")
-s.lengthOfLongestSubstring2("bcdpwawkew")
-s.lengthOfLongestSubstring2("pwawkalemkw")
-s.lengthOfLongestSubstring2("pwamkfpbwefjqbzaekw")
-
-#s.lengthOfLongestSubstring2("ajhfgdshp18y2304cnuqwankbrhlbjpqo02-o;aslg.mdlnfoyt0294uivm=i[plkasm.,dnjksdbfgzkbcx,jngksmdfj,[pyktjorjh9ty7829479810-9=orkspfdljnbfjkbzbxnkc.mzxn,mv ncbvagfuygdyukqpoweklgndnkdh irotmhugfib[pvnsbcrg,dimhxgvjtyegshuxjkr[kbhtpg8y2u-nfmpcbyt809p4nq67oiwvybnua smjtghdknfskzljnbry1ui26q7w5ufijd[m2p;3owe7utnim[0q'wpa;oly5bnucop,2mus8nupv5w8no7o")
+print(s.lengthOfLongestSubstring("pwawkew"))
+print(s.lengthOfLongestSubstring("bcdpwawkew"))
+print(s.lengthOfLongestSubstring("pwawkalemkw"))
+print(s.lengthOfLongestSubstring("pwamkfpbwefjqbzaekw"))
+print(s.lengthOfLongestSubstring("ajhfgdshp18y2304cnuqwkkankbrhlbjpqo02-o;aslg.mdlnfoyt0294uivm=i[plkasm.,dnjksdbfgzkbcx,jngksmdfj,[pyktjorjh9ty7829479810-9=orkspfdljnbfjkbzbxnkc.mzxn,mv ncbvagfuygdyukqpoweklgndnkdh irotmhugfib[pvnsbcrg,dimhxgvjtyegshuxjkr[kbhtpg8y2u-nfmpcbyt809p4nq67oiwvybnua smjtghdknfskzljnbry1ui26q7w5ufijd[m2p;3owe7utnim[0q'wpa;oly5bnucop,2mus8nupv5w8no7o"))
