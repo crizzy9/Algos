@@ -28,20 +28,18 @@ class Solution:
         print('algo1: longest unique substring for {} is {} with length: {}'.format(s, longest, len(longest)))
         return len(longest)
 
-    # Beats 48.59% of submissions 112ms
+    # Beats 66.74% of submissions 96ms
     def lengthOfLongestSubstring2(self, a):
         # create char freq dict
-        cd = Counter(a)
-        cd = {k:[v, -1] for k, v in cd.items()}
+        cd = {} 
         i = 0
         j = 0
         longest = ''
         while j < len(a):
-            cf = cd.get(a[j])
-            if cf[1] >= i:
-                i = cf[1]+1
-            cf[1] = j
-            cf[0] -= 1
+            cf = cd.get(a[j], -1)
+            if cf >= i:
+                i = cf + 1
+            cd[a[j]] = j
             j += 1
             if len(a[i:j]) > len(longest):
                 longest = a[i:j]
