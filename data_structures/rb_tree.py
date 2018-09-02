@@ -7,7 +7,7 @@ class Color(Enum):
 
 
 class RBNode:
-    def __init__(self, value, color=Color.BLACK, parent=None, left=None, right=None):
+    def __init__(self, value, color=Color.RED, parent=None, left=None, right=None):
         self.value = value
         self.color = color
         self.parent = parent
@@ -27,9 +27,10 @@ class RBNode:
             return False
 
     def tree_rep(self, level=0):
-        ret = "\t"*level+'|'+repr(self.value)+"--\n"
+        v = (self.value, 'R' if self.color == Color.RED else 'B')
+        ret = "\t\t"*level+'|' + str(v) + "\n"
         for child in [self.left, self.right]:
-            if child.value is None:
+            if child is None or child.value is None:
                 continue
             ret += child.tree_rep(level+1)
         return ret
@@ -88,6 +89,7 @@ class RedBlackTree:
         return h
 
     def insert(self, z):
+        # print("Inserting", z)
         y = self.sentinel
         x = self.root
         while x != self.sentinel:
@@ -107,16 +109,55 @@ class RedBlackTree:
         z.left = self.sentinel
         z.right = self.sentinel
         z.color = Color.RED
-        self.insert_fixup(z)
+        print("Before fixup")
+        print(self.__repr__())
+        self.insert_fixup2(z)
+        print("After fixup")
+        print(self.__repr__())
+
+    def insert_fixup2(self, z):
+        z.color = Color.RED
+        while z != self.root and z.parent.color == Color.RED:
+            if z.parent == z.parent.parent.left:
+                y = z.parent.parent.right
+                if y and y.color == Color.RED:
+                    z.parent.color = Color.BLACK
+                    y.color = Color.BLACK
+                    z.parent.parent.color = Color.RED
+                    z = z.parent.parent
+                else:
+                    if z == z.parent.right:
+                        z = z.parent
+                        self.left_rotate(z)
+                    z.parent.color = Color.BLACK
+                    z.parent.parent.color = Color.RED
+                    self.right_rotate(z.parent.parent)
+            else:
+                y = z.parent.parent.left
+                if y and y.color == Color.RED:
+                    z.parent.color = Color.BLACK
+                    y.color = Color.BLACK
+                    z.parent.parent.color = Color.RED
+                    z = z.parent.parent
+                else:
+                    if z == z.parent.left:
+                        z = z.parent
+                        self.right_rotate(z)
+                    z.parent.color = Color.BLACK
+                    z.parent.parent.color = Color.RED
+                    self.left_rotate(z.parent.parent)
+        self.root.color = Color.BLACK
 
     def insert_fixup(self, z):
         while z.parent.color == Color.RED:
+            if z.parent.parent is None and self.get_tree_height() <= 1:
+                break
             if z.parent == z.parent.parent.left:
                 y = z.parent.parent.right
                 if y.color == Color.RED:
                     z.parent.color = Color.BLACK
                     y.color = Color.BLACK
-                    z.parent.parent = Color.RED
+                    z.parent.parent.color = Color.RED
                     z = z.parent.parent
                 elif z == z.parent.right:
                     z = z.parent
@@ -130,7 +171,7 @@ class RedBlackTree:
                 if y.color == Color.RED:
                     z.parent.color = Color.BLACK
                     y.color = Color.BLACK
-                    z.parent.parent = Color.RED
+                    z.parent.parent.color = Color.RED
                     z = z.parent.parent
                 elif z == z.parent.left:
                     z = z.parent

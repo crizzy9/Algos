@@ -1,22 +1,34 @@
 # https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
 
 class Solution:
-    def lengthOfLongestSubstring(self, s):
-        final_max = ''
-        new_max = ''
-        for c in s:
-            if c in new_max:
-                ind = new_max.index(c)
-                if len(new_max) >= len(final_max):
-                    final_max = new_max
-                print(ind)
-                new_max = new_max[ind+1:]
-                print(new_max)
-            else:
-                new_max += c
-        print(final_max)
+    def lengthOfLongestSubstring(self, a):
+        """
+        :type a: str
+        :rtype: int
+        """
+        s = a
+        curr = ''
+        longest = ''
+        i = 0
+        while i < len(a):
+            try:
+                ind = curr.index(a[i])
+                a = a[ind+1:]
+                i = 0
+                if len(longest) < len(curr):
+                    longest = curr
+                curr = ''
+            except ValueError as e:
+                curr += a[i]
+                if len(longest) < len(curr):
+                    longest = curr
+                i += 1
+
+        return len(longest)
 
 s = Solution()
 s.lengthOfLongestSubstring("pwawkew")
 s.lengthOfLongestSubstring("bcdpwawkew")
+s.lengthOfLongestSubstring("pwawkalemkw")
+s.lengthOfLongestSubstring("pwamkfpbwefjqbzaekw")
 
