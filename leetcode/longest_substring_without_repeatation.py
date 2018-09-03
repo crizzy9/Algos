@@ -1,5 +1,4 @@
 # https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
-from collections import Counter
 
 class Solution:
     # Beats 72.19 % of python3 solutions
