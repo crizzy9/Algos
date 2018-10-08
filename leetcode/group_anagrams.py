@@ -6,13 +6,18 @@ class Solution:
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        group_dict = {}
+        groups = []
+        group_sets = []
 
         for s in strs:
             str_set = set(s)
-            group_dict.setdefault(str_set, []).append(s)
+            if str_set not in group_sets:
+                group_sets.append(str_set)
+                groups.append([s])
+            else:
+                groups[group_sets.index(str_set)].append(s)
 
-        print(group_dict)
+        print(groups)
 
 
 sol = Solution()
