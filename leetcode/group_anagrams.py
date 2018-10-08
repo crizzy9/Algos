@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/group-anagrams/description/
 from collections import Counter
 
+#really bad solution -> better algo
 class Solution:
     def groupAnagrams(self, strs):
         """
@@ -12,11 +13,11 @@ class Solution:
 
         for s in strs:
             str_set = Counter(s)
-            if str_set not in group_sets:
+            try:
+                groups[group_sets.index(str_set)].append(s)
+            except Exception as e:    
                 group_sets.append(str_set)
                 groups.append([s])
-            else:
-                groups[group_sets.index(str_set)].append(s)
 
         print(groups)
 
