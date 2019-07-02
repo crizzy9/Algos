@@ -28,6 +28,8 @@ class Solution:
         return zigzag_str
 
 
+# Use formula: Tn = a + (n-1)*d
+# n starts from 1
 
 
 

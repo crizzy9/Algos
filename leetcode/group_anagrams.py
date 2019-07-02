@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/group-anagrams/description/
 from collections import Counter
 
-#really bad solution -> better algo
+#really bad solution -> turns out it was actually worse
 class Solution:
     def groupAnagrams(self, strs):
         """
