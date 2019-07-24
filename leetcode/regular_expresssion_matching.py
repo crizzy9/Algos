@@ -39,23 +39,28 @@ class Solution:
         else:
             return False
 
+    def isMatchRecursive(self, text, pattern):
+        if not pattern:
+            return not text
+
+        first = bool(text) and pattern[0] in {text[0], '.'}
+
+        if len(pattern) >= 2 and pattern[1] == '*':
+            return self.isMatchRecursive(text, pattern[2:]) or self.isMatchRecursive(text[1:], pattern)
+        else:
+            return self.isMatchRecursive(text[1:], pattern[1:])
+
 
 if __name__ == '__main__':
     sol = Solution()
-    assert sol.isMatch("aa", "a") == False
-    assert sol.isMatch("aa", "a*") == True
-    assert sol.isMatch("ab", ".*") == True
-    assert sol.isMatch("aab", "c*a*b") == True
-    assert sol.isMatch("ccb", "c*a*b") == True
-    assert sol.isMatch("ccaaab", "c*a*b") == True
-    assert sol.isMatch("ccaaa", "c*a*b*") == True
-    assert sol.isMatch("ccaaa", "c*a*b") == False
-    assert sol.isMatch("ccaaa", "c*a*b*e*d") == False
-    assert sol.isMatch("ccaaaaskdhakshdgfjhgasbadhsigh", "c*a*b*.*") == True
-    assert sol.isMatch("mississippi", "mis*is*p*.") == False
-    assert sol.isMatch("", ".ac") == False
-    assert sol.isMatch("b", "b.bc") == False
-    assert sol.isMatch("aaa", "a*a") == True
-    assert sol.isMatch("aaa", "a*aa") == True
-    assert sol.isMatch("aaabbbb", "a*aab*bb.*") == True
-    assert sol.isMatch("aaabbbb", "a*aab*.b.") == True
+
+    examples = [("aa", "a", False), ("aa", "a*", True), ("ab", ".*", True), ("aab", "c*a*b", True), ("ccb", "c*a*b", True), ("ccaaab", "c*a*b", True), ("ccaaa", "c*a*b*", True), ("ccaaa", "c*a*b", False), ("ccaaa", "c*a*b*e*d", False), ("ccaaaaskdhakshdgfjhgasbadhsigh", "c*a*b*.*", True), ("mississippi", "mis*is*p*.", False), ("", ".ac", False), ("b", "b.bc", False), ("aaa", "a*a", True), ("aaa", "a*aa", True), ("aaabbbb", "a*aab*bb.*", True), ("aaabbbb", "a*aab*.b.", True)]
+
+    for ex in examples:
+        s, p, r = ex
+        print(s, p, r)
+        # assert sol.isMatch(s, p) == r
+        assert sol.isMatchRecursive(s, p) == r
+
+    print("All Tests passed!")
+
