@@ -1,4 +1,3 @@
-
 local function print_table(t)
   print("===FINAL TABLE===")
 
