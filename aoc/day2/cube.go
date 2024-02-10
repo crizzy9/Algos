@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	content := readFileInput("aoc/day2_full_input.txt")
+	content := readFileInput("aoc/day2/day2_full_input.txt")
 	// content := readFileInput("aoc/day2_input.txt")
 	games := strings.Split(strings.TrimSpace(string(content)), "\n")
 

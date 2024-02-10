@@ -213,7 +213,7 @@ print("Trebuchet: " .. sum_treb(out2))
 
 
 ------ INP 3 -----------
-local inp3 = lines_from("aoc/treb_input.txt")
+local inp3 = lines_from("aoc/day1/treb_input.txt")
 -- print_table(inp)
 
 local out3 = trebuchet(inp3)
