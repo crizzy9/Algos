@@ -23,7 +23,7 @@ class Solution:
 
         c = 0
         while c < len(zeros):
-            i, j == zeros[0]
+            i, j = zeros[0]
 
 
 if __name__ == '__main__':
