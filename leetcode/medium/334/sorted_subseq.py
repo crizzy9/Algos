@@ -46,10 +46,13 @@ def sorted_subseq_n(arr, n):
 
 a1 = [12, 11, 10, 5, 6, 2, 30]
 a2 = [6, 9, 5, 7, 8, 4, 10]
+a3 = [4,3,2,1]
 print(sorted_subseq(a1))
 print(sorted_subseq(a2))
 print(sorted_subseq_n(a1, 3))
 print(sorted_subseq_n(a2, 3))
+print(sorted_subseq(a3))
+print(sorted_subseq_n(a3, 3))
 
 
 
