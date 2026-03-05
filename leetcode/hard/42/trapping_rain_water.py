@@ -1,7 +1,7 @@
 from typing import List
 
 class Solution:
-    def trap(self, height: List[int]) -> int:
+    def trap(self, height: list[int]) -> int:
         left, right = 0, len(height) - 1
         ans = 0
         left_max, right_max = 0, 0
