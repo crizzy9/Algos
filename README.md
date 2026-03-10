@@ -19,3 +19,13 @@ Dump of Algorithm and Data structure algorithms with leetcode and Advent of Code
 ## Commonly used techniques
 1. Bitwise operation
 
+
+## Current
+- ./leetcode/medium/5/longest_palindrome.py
+- ./leetcode/medium/18/four_sum.py
+- ./leetcode/medium/334/sorted_subseq.py
+- ./leetcode/medium/378/kth_smallest.py
+- ./leetcode/hard/51/nqueens.py
+- ./leetcode/easy/206/reverse_ll.py
+- ./leetcode/medium/79/word_search.py
+- ./leetcode/medium/99/recover_bst.py

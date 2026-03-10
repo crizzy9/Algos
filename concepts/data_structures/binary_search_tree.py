@@ -1,9 +1,13 @@
+from typing import override
+
+
 class Node:
     def __init__(self, key):
         self.val = key
         self.left = None
         self.right = None
 
+    @override
     def __repr__(self):
         return "{}".format(self.val)
 

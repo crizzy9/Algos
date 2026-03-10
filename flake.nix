@@ -3,18 +3,26 @@
 
   inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
-      supportedSystems =
-        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSupportedSystem = f:
-        nixpkgs.lib.genAttrs supportedSystems (system:
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forEachSupportedSystem =
+        f:
+        nixpkgs.lib.genAttrs supportedSystems (
+          system:
           f {
             pkgs = import nixpkgs {
               inherit system;
               overlays = [ self.overlays.default ];
             };
-          });
+          }
+        );
 
       # Change this value ({major}.{min}) to
       # update the Python virtual-environment
@@ -30,13 +38,16 @@
       # be a manual step, even if trivial.
       version = "3.13";
       goVersion = 24;
-    in {
+    in
+    {
       overlays.default = final: prev: {
         go = final."go_1_${toString goVersion}";
       };
-      devShells = forEachSupportedSystem ({ pkgs }:
+      devShells = forEachSupportedSystem (
+        { pkgs }:
         let
-          concatMajorMinor = v:
+          concatMajorMinor =
+            v:
             pkgs.lib.pipe v [
               pkgs.lib.versions.splitVersion
               (pkgs.lib.sublist 0 2)
@@ -44,7 +55,8 @@
             ];
 
           python = pkgs."python${concatMajorMinor version}";
-        in {
+        in
+        {
           default = pkgs.mkShellNoCC {
             venvDir = ".venv";
 
@@ -67,6 +79,7 @@
             packages = [
               python.pkgs.venvShellHook
               python.pkgs.pip
+              python.pkgs.pytest
 
               # Add whatever else you'd like here.
               # pkgs.basedpyright
@@ -88,6 +101,7 @@
               pkgs.golangci-lint
             ];
           };
-        });
+        }
+      );
     };
 }
