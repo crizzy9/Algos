@@ -2,21 +2,38 @@
 class Account:
     def __init__(self, timestamp: int, account_id: str) -> None:
         self.account_id: str = account_id
-        self.history: list[dict[str, str|int]] = [{
-            "event": "CREATE",
-            "timestamp": timestamp
-        }]
+        self.created_at: int = timestamp
+        # self.history: list[dict[str, str|int]] = [{
+        #     "event": "CREATE",
+        #     "timestamp": timestamp
+        # }]
         self.balance: int = 0
+        self.outgoing: int = 0
         self.payments: dict[str, str] = {}
-    
+        self.balance_history: list[tuple[int, int]] = [(timestamp, 0)]
+
+    def deposit(self, amount: int) -> int:
+        self.balance += amount
+        return self.balance
+
+    def withdraw(self, amount: int) -> bool:
+        if self.balance < amount:
+            return False
+        self.balance -= amount
+        self.outgoing += 1
+        return True
+
+    def record_balance():
+        pass
+
     def get_balance(self, timestamp: int):
         cashback = 2
         day_timestamp = 24*60*60*1000 
         final_balance = self.balance
-        for e in self.history:
-            if e["event"] == "CASHBACK" and int(e["timestamp"]) + day_timestamp >= timestamp:
-                final_balance += round((int(e["amount"]) + cashback)*100)
-
+        # for e in self.history:
+        #     if e["event"] == "CASHBACK" and int(e["timestamp"]) + day_timestamp >= timestamp:
+        #         final_balance += round((int(e["amount"]) + cashback)*100)
+        #
         return final_balance
 
 class Simulation:
@@ -34,13 +51,15 @@ class Simulation:
     def deposit(self, timestamp: int, account_id: str, amount: int) -> int | None:
         account = self.accounts.get(account_id)
         if account is not None:
-            account.balance += amount
-            account.history.append({
-                "event": "DEPOSIT",
-                "timestamp": timestamp,
-                "amount": amount
-            })
-            return account.balance
+            final_balance = account.deposit(amount)
+            account.record_balance()
+            # account.balance += amount
+            # account.history.append({
+            #     "event": "DEPOSIT",
+            #     "timestamp": timestamp,
+            #     "amount": amount
+            # })
+            # return account.balance
         return None
 
 
@@ -83,6 +102,7 @@ class Simulation:
                 "timestamp": timestamp,
                 "amount": amount
             })
+            payments[f"payment{counter+1}"]
             pass
         return None
 
