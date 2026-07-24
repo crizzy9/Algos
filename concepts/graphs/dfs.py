@@ -20,5 +20,6 @@ def dfs_recursive(graph, vertex, path=[]):
 
     return path
 
+
 # dfs with coloring uses less space recursive
 # dfs with coloring iterative uses more space and uses 2 stacks

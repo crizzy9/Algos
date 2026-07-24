@@ -35,3 +35,28 @@ then offer letter valid for 5 days
 for sse only coding and instead of ml design its regular system design
 
 leadership interview is tricky - prepare properly for it
+
+## Isaac Collins - SWE
+
+### Interview Process
+
+Role: ? (L4 mostly) - Software Engineering
+Location: Mostly Bay Area
+
+2 rounds of interviews
+
+1. Round 1 - 2 45 min interviews
+   - coding (leetcode type of questions) - python - Coder Pad
+     - coding competency, data structures
+     - techincal communication is weighed heavily
+   - google leadership - behavioral - deep dive, tell me about a time type of questions
+
+2. Final Round
+   - Coding - Coder Pad
+   - Domain Specific Interview - AI Calibrated interview, Understanding of AI and ML
+   - System Design for L5 roles
+
+3. Final Team Maching
+   - Team Matching
+
+Mock Interview is supported
