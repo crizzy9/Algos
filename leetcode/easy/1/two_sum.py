@@ -8,13 +8,14 @@ class Solution:
         compliments = {}
         out = []
         for i in range(len(nums)):
-            compliment = target-nums[i]
+            compliment = target - nums[i]
             if compliment in compliments:
-                out = [i+1, compliments.get(compliment)+1]
+                out = [i, compliments.get(compliment)]
                 break
             else:
                 compliments[nums[i]] = i
         return out
 
+
 sol = Solution()
-print(sol.twoSum([2,3,4], 6))
+print(sol.twoSum([2, 3, 4], 6))
